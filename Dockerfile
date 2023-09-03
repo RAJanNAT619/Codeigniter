@@ -1,2 +1,6 @@
-FROM php:8.0-apache as base
-COPY DroneDeus-pipeline/ /var/www/html
+FROM php:7.2-apache
+RUN docker-php.ext-install pdo pdo_mysql mysqli
+CMD /usr/sbin/apache2ctl -D FOREGROUND
+CMD mysql start
+COPY ./ /var/www/html/
+EXPOSE 80
