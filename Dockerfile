@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:8.0-apache
 RUN docker-php-ext-install bcmath && docker-php-ext-enable bcmath && \
         docker-php-ext-install calendar && docker-php-ext-enable calendar && \
         docker-php-ext-install gd && docker-php-ext-enable gd && \
@@ -11,6 +11,7 @@ RUN docker-php-ext-install bcmath && docker-php-ext-enable bcmath && \
         docker-php-ext-install wddx && docker-php-ext-enable wddx && \
         docker-php-ext-install wmlrpc && docker-php-ext-enable wmlrpc && \
         docker-php-ext-install zip && docker-php-ext-enable zip
+RUN apt-get update && apt-get upgrade -y
 CMD /usr/sbin/apache2ctl -D FOREGROUND
 CMD mysql start
 COPY ./ /var/www/html/
